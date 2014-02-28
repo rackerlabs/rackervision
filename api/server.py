@@ -2,9 +2,17 @@ import cgi
 from wsgiref import simple_server
 
 import falcon
-
+import uuid
+import pyrax
 
 class VideoCollection(object):
+
+    def __init__(self):
+        pyrax.keyring_auth("rackervision")
+        pyrax.queues.client_id = _generate_id()
+        self.unprocessed_container = pyrax.cloudfiles.get_container("unprocessed")
+        self.processed_container = pyrax.cloudfiles.get_container("processed")
+        self.queue = pyrax.queues.get("unprocessed")
 
     def on_get(self, req, resp):
         # TODO(kgriffs): List videos
@@ -17,10 +25,18 @@ class VideoCollection(object):
         # if video_field.file:
         #     pass
 
-        data = video.read()
+        #data = video
+        uuid = _generate_id()
+        self.unprocessed_container.upload_file(video, uuid)
+        self.queue.post_message(uuid, 1209599)
+        
 
         # TODO(kgriffs): Stream into Swift
         # TODO(kgriffs): On successful stream, create video document in mongo
+
+
+def _generate_id():
+    return str(uuid.uuid1())
 
 
 app = application = falcon.API()
