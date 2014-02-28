@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RackerVision: Watch and Share Amazing Videos</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>RackerVision: Watch and Share Amazing Videos</h1>
+      </div>
+    </div>
+
+    <div class="row">
+        <h5>Upload Your Video for Much Good!</h5>
+        <form action="http://localhost:8000/videos" method="post" enctype="multipart/form-data">
+				  <div class="row">
+				    <div class="large-4 medium-4 columns">
+				      <label>Give it a Name</label>
+				      <input type="text" name="title" placeholder="Short and Sweet" />
+				    </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <input type="file" name="video" />
+              <input type="submit" />
+            </div>
+          </div>
+				</form>
+      </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
