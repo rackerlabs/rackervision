@@ -25,7 +25,6 @@ class VideoCollection(object):
         # if video_field.file:
         #     pass
 
-        #data = video
         uuid = _generate_id()
         self.unprocessed_container.upload_file(video, uuid)
         self.queue.post_message(uuid, 1209599)
